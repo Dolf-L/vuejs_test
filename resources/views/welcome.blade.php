@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
     <head>
         <meta charset="utf-8">
+        <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script>
+        <meta name="_token" content="{{ csrf_token() }}"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,7 +14,6 @@
 
         <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
 
-        <script src="{{ elixir('js/app.js') }}"></script>
 
         <!-- Styles -->
         <style>
@@ -69,41 +70,12 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel 5
-                </div>
-                <div id="app">
-                    @{{ message }}
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+        <div class="container">
+            <tasks></tasks>
         </div>
+
+        <script src="{{ elixir('js/app.js') }}"></script>
+
     </body>
 
-
-
-    <script>
-        new Vue ({
-            el: '#app',
-            data: {
-                message: 'hellow world'
-            }
-        });
-    </script>
 </html>

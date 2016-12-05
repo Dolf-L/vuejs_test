@@ -13,13 +13,6 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: '#app',
-    data: {
-        message: 'Hello Vue World!'
-    }
-});
+Vue.component('tasks', require('./components/Tasks.vue'));
 
 
