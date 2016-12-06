@@ -12,7 +12,20 @@ require('./bootstrap');
  * the body of the page. From here, you may begin adding components to
  * the application, or feel free to tweak this setup for your needs.
  */
+var Vue = require('vue');
 
-Vue.component('tasks', require('./components/Tasks.vue'));
+Vue.component('tasks', {
+    template: "#tasks-template",
+
+    props: ['list'],
+
+    create() {
+        this.list = JSON.parse(this.list);
+    }
+});
+
+new Vue({
+    el: '.container',
+});
 
 

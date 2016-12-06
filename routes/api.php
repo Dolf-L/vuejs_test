@@ -14,24 +14,24 @@ use App\Models\Task;
 |
 */
 
-Route::group(['middleware' => 'api'], function() {
-    Route::get('tasks', function () {
-        return Task::latest()->orderBy('created_at', 'desc')->get();
-    });
-
-    Route::get('task/{id}', function ($id) {
-        return Task::findOrFail($id);
-    });
-
-    Route::post('task/store', function (Request $request) {
-        return Task::create(['body' => $request->input(['body'])]);
-    });
-
-    Route::patch('task/{id}', function (Request $request, $id) {
-        Task::findOrFail($id)->update(['body' => $request->input(['body'])]);
-    });
-
-    Route::delete('task/{id}', function ($id) {
-        return Task::destroy($id);
-    });
-});
+//Route::group(['middleware' => 'api'], function() {
+//    Route::get('tasks', function () {
+//        return Task::latest()->orderBy('created_at', 'desc')->get();
+//    });
+//
+//    Route::get('task/{id}', function ($id) {
+//        return Task::findOrFail($id);
+//    });
+//
+//    Route::post('task/store', function (Request $request) {
+//        return Task::create(['body' => $request->input(['body'])]);
+//    });
+//
+//    Route::patch('task/{id}', function (Request $request, $id) {
+//        Task::findOrFail($id)->update(['body' => $request->input(['body'])]);
+//    });
+//
+//    Route::delete('task/{id}', function ($id) {
+//        return Task::destroy($id);
+//    });
+//});
