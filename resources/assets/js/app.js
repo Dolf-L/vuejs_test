@@ -12,20 +12,52 @@ require('./bootstrap');
  * the body of the page. From here, you may begin adding components to
  * the application, or feel free to tweak this setup for your needs.
  */
-var Vue = require('vue');
 
-Vue.component('tasks', {
-    template: "#tasks-template",
+Vue.component('tasks-list', {
+    props: ['title'],
 
-    props: ['list'],
+    data() {
+        return {
+            tasks: [
+                {name: 'first', deleted: true},
+                {name: 'second', deleted: false},
+                {name: 'third', deleted: false},
+                {name: 'fourth', deleted: false},
+                {name: 'fifth', deleted: false},
+            ],
+        }
+    },
 
-    create() {
-        this.list = JSON.parse(this.list);
+    template:
+    '<div>' +
+        '<h1>{{ title}}</h1>' +
+        '<ul class="list-group" >' +
+            '<task class="list-group-item" v-for="task in tasks">{{ task.name }}' +
+            '</task>' +
+        '</ul>' +
+    '</div>',
+});
+
+Vue.component('task', {
+    data() {
+        return {
+            isVisible: true,
+        }
+    },
+    template:
+    '<li v-show="isVisible">' +
+        '<slot></slot>' +
+        '<button type="button" @click="hide">X</button>' +
+    '</li>',
+
+    methods: {
+        hide() {
+            this.isVisible = false;
+        }
     }
 });
+
 
 new Vue({
     el: '.container',
 });
-
-

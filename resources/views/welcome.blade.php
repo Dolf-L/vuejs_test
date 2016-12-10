@@ -20,23 +20,14 @@
     <body>
 
         <div class="container">
-            <tasks :list="{{ $tasks }}"></tasks>
+
+            <tasks-list title="My tasks"></tasks-list>
+            <tasks-list title="Comleted tasks"></tasks-list>
+
         </div>
 
-        <template id="tasks-template">
-            <div>
-                <h1>My tasks</h1>
-
-                <ul class="list-group">
-                    <li class="list-group-item" v-for="task in list">
-                        @{{ task.body }}
-                    </li>
-                </ul>
-            </div>
-        </template>
-
-        <script src="https://unpkg.com/vue@2.1.4/dist/vue.js"></script>
         <script src="{{ elixir('js/app.js') }}"></script>
+
 
 
     </body>
