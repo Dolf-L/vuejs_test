@@ -13,51 +13,85 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('tasks-list', {
-    props: ['title'],
-
-    data() {
-        return {
-            tasks: [
-                {name: 'first', deleted: true},
-                {name: 'second', deleted: false},
-                {name: 'third', deleted: false},
-                {name: 'fourth', deleted: false},
-                {name: 'fifth', deleted: false},
-            ],
-        }
-    },
-
+Vue.component('tabs', {
     template:
-    '<div>' +
-        '<h1>{{ title}}</h1>' +
-        '<ul class="list-group" >' +
-            '<task class="list-group-item" v-for="task in tasks">{{ task.name }}' +
-            '</task>' +
+    '<div class="container">' +
+
+        '<ul class="list-group">' +
+            '<li v-for="tab in tabs" @click="selectTab(tab)" :class="{ \'active\' : tab.isActive }" class="list-group-item list-group-item-action">' +
+                '<a :href="tab.href">{{ tab.title }}</a>' +
+            '</li>' +
         '</ul>' +
-    '</div>',
-});
 
-Vue.component('task', {
+        '<div class="tab-content>"' +
+            '<slot></slot>' +
+        '</div>' +
+    '</div>',
+
     data() {
         return {
-            isVisible: true,
-        }
+            tabs: [],
+
+            isActive: false
+        };
     },
-    template:
-    '<li v-show="isVisible">' +
-        '<slot></slot>' +
-        '<button type="button" @click="hide">X</button>' +
-    '</li>',
+
+    created() {
+        this.tabs = this.$children;
+    },
 
     methods: {
-        hide() {
-            this.isVisible = false;
+        selectTab(selectedTab) {
+            this.tabs.forEach(tab => {
+                tab.isActive = (tab.title == selectedTab.title)
+            })
         }
-    }
+    },
+
+});
+
+Vue.component('tab', {
+    props: {
+        title: { required: true },
+
+        seleted: { default: false },
+    },
+
+    data() {
+        return {
+            isActive: false
+        }
+    },
+
+    mounted() {
+        this.isActive = this.seleted;
+    },
+
+    computed: {
+        href() {
+            return '#' + this.title.toLocaleLowerCase().replace(/ /g, '-')
+        }
+    },
+
+    template:
+    '<p v-show="isActive">' +
+        '<slot></slot>' +
+    '</p>',
 });
 
 
 new Vue({
     el: '.container',
+
+    data: {
+        showFirst: false,
+        showSecond: false,
+    },
+
+    methods: {
+        showAll() {
+            this.showFirst = true;
+            this.showSecond = true;
+        }
+    }
 });

@@ -19,11 +19,20 @@
     </head>
     <body>
 
-        <div class="container">
+        <div class="container" style="margin-top: 30px">
+            <tabs>
+                <tab title="Title 1" :seleted="true">
+                    <span>Content 1 1 1 1 1 1 </span>
+                </tab>
 
-            <tasks-list title="My tasks"></tasks-list>
-            <tasks-list title="Comleted tasks"></tasks-list>
+                <tab title="Title 2">
+                    <span>Content 2 2 2 2 2 2 2</span>
+                </tab>
 
+                <tab title="Title 3">
+                    <span>Content 3 3 3 3 3 3 3 3</span>
+                </tab>
+            </tabs>
         </div>
 
         <script src="{{ elixir('js/app.js') }}"></script>
