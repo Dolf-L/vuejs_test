@@ -20,6 +20,26 @@
     <body>
 
         <div class="container" style="margin-top: 30px">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+                Open Modal
+            </button>
+
+            <!-- Modal -->
+            <modal>
+                <template slot=title>
+                    My awesome title
+                </template>
+
+                    sdfsdfsdfsdfsdf
+
+
+                <template slot=footer>
+
+                </template>
+            </modal>
+            <p></p>
+
             <tabs>
                 <tab title="Title 1" :seleted="true">
                     <span>Content 1 1 1 1 1 1 </span>
@@ -33,7 +53,12 @@
                     <span>Content 3 3 3 3 3 3 3 3</span>
                 </tab>
             </tabs>
+
+            <input-text></input-text>
+            <span v-if="alert">Your text has been saved</span>
         </div>
+
+
 
         <script src="{{ elixir('js/app.js') }}"></script>
 

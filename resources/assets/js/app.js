@@ -13,13 +13,64 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
+window.Event = new Vue();
+
+Vue.component('modal', {
+   template:
+   '<div id="myModal" class="modal fade" role="dialog">' +
+       '<div class="modal-dialog">' +
+           '<!-- Modal content-->' +
+
+           '<div class="modal-content">' +
+
+                '<div class="modal-header">' +
+                    '<button type="button" class="close" data-dismiss="modal">' +
+                       '&times;' +
+                   '</button>' +
+                    '<h4 class="modal-title">' +
+                        '<slot name="title"></slot>' +
+                    '</h4>' +
+                '</div>' +
+
+               '<div class="modal-body">' +
+                    '<p>' +
+                        '<slot></slot>' +
+                   '</p>' +
+               '</div>' +
+
+               '<div class="modal-footer">' +
+                   '<p>' +
+                    '<slot name="footer">' +
+                       '<button type="button" class="btn btn-default" data-dismiss="modal">' +
+                       'Close' +
+                       '</button>' +
+                    '</slot>' +
+                   '</p>' +
+               '</div>' +
+
+           '</div>' +
+       '</div>' +
+   '</div>',
+}),
+
+
+Vue.component('input-text', {
+    template: '<input type="text" placeholder="enter your text here..." @keyup.enter="showAlert"/>',
+
+    methods: {
+        showAlert() {
+            Event.$emit('save');
+        }
+    }
+});
+
 Vue.component('tabs', {
     template:
     '<div class="container">' +
 
         '<ul class="list-group">' +
-            '<li v-for="tab in tabs" @click="selectTab(tab)" :class="{ \'active\' : tab.isActive }" class="list-group-item list-group-item-action">' +
-                '<a :href="tab.href">{{ tab.title }}</a>' +
+            '<li v-for="tab in tabs"  :class="{ \'active\' : tab.isActive }" class="list-group-item list-group-item-action">' +
+                '<a @click="selectTab(tab)" :href="tab.href">{{ tab.title }}</a>' +
             '</li>' +
         '</ul>' +
 
@@ -83,15 +134,7 @@ Vue.component('tab', {
 new Vue({
     el: '.container',
 
-    data: {
-        showFirst: false,
-        showSecond: false,
-    },
+    render: h => h(Demo),
 
-    methods: {
-        showAll() {
-            this.showFirst = true;
-            this.showSecond = true;
-        }
-    }
+    components: { msg }
 });
